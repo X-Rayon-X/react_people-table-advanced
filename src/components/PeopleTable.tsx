@@ -5,10 +5,11 @@ import { PersonRow } from './PersonRow';
 import { SortLink } from './SortLink';
 
 interface Props {
+  filteredPeople: Person[];
   people: Person[];
 }
 
-export const PeopleTable: React.FC<Props> = ({ people }) => {
+export const PeopleTable: React.FC<Props> = ({ filteredPeople, people }) => {
   return (
     <table
       data-cy="peopleTable"
@@ -50,7 +51,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
       </thead>
 
       <tbody>
-        {people.map(person => (
+        {filteredPeople.map(person => (
           <PersonRow people={people} person={person} key={person.slug} />
         ))}
       </tbody>

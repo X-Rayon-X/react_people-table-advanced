@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/indent */
 import { PeopleFilters } from './PeopleFilters';
 import { Loader } from './Loader';
 import { PeopleTable } from './PeopleTable';
@@ -77,9 +78,11 @@ export const PeoplePage = () => {
 
       <div className="block">
         <div className="columns is-desktop is-flex-direction-row-reverse">
-          <div className="column is-7-tablet is-narrow-desktop">
-            <PeopleFilters />
-          </div>
+          {!isLoading && !errorMessage && !!people.length && (
+            <div className="column is-7-tablet is-narrow-desktop">
+              <PeopleFilters />
+            </div>
+          )}
 
           <div className="column">
             <div className="box table-container">
@@ -95,12 +98,17 @@ export const PeoplePage = () => {
                 </p>
               )}
 
-              {!filteredPeople.length && (
-                <p>There are no people matching the current search criteria</p>
-              )}
+              {!isLoading &&
+                !errorMessage &&
+                !!people.length &&
+                !filteredPeople.length && (
+                  <p>
+                    There are no people matching the current search criteria
+                  </p>
+                )}
 
               {!isLoading && !errorMessage && !!filteredPeople.length && (
-                <PeopleTable people={filteredPeople} />
+                <PeopleTable filteredPeople={filteredPeople} people={people} />
               )}
             </div>
           </div>

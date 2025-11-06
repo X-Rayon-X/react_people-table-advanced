@@ -1,6 +1,6 @@
 import React from 'react';
 import { Person } from '../types';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import classNames from 'classnames';
 
 interface Props {
@@ -9,10 +9,12 @@ interface Props {
 }
 
 export const PersonLink: React.FC<Props> = ({ person, parentName }) => {
+  const { search } = useLocation();
+
   return person ? (
     <NavLink
       className={classNames({ 'has-text-danger': person.sex === 'f' })}
-      to={`/people/${person.slug}`}
+      to={`/people/${person.slug}${search}`}
     >
       {person.name}
     </NavLink>
